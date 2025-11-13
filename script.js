@@ -3,6 +3,10 @@ const categoryFilter = document.getElementById("categoryFilter");
 const productsContainer = document.getElementById("productsContainer");
 const chatForm = document.getElementById("chatForm");
 const chatWindow = document.getElementById("chatWindow");
+const product = document.getElementById("product-card");
+
+// A list of all selected products
+let savedProducts = [];
 
 /* Show initial placeholder until user selects a category */
 productsContainer.innerHTML = `
@@ -48,6 +52,24 @@ categoryFilter.addEventListener("change", async (e) => {
 
   displayProducts(filteredProducts);
 });
+
+/* When a product card is clicked, toggle a black border around it.
+  Use event delegation because product cards are added dynamically. */
+productsContainer.addEventListener("click", (e) => {
+  // Find the nearest ancestor that is a product card (or the element itself)
+  const card = e.target.closest(".product-card");
+  if (!card) return; // Click wasn't on a product card
+
+  // Toggle a "selected" visual state. We set inline style so no CSS changes are required.
+  if (card.classList.contains("selected")) {
+   card.classList.remove("selected");
+   card.style.border = "";
+  } else {
+   card.classList.add("selected");
+   card.style.border = "3px solid #e3a535";
+  }
+});
+
 
 /* Chat form submission handler - placeholder for OpenAI integration */
 chatForm.addEventListener("submit", (e) => {
