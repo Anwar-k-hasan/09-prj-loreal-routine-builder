@@ -180,12 +180,15 @@ body {
 
 .product-card {
   flex: 0 1 calc(33.333% - 14px);
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   padding: 15px;
   border-radius: 4px;
+  background: #fff;
   display: flex;
   gap: 15px;
   min-height: 160px;
+  transition: transform 200ms ease, box-shadow 200ms ease,
+    border-color 200ms ease;
 }
 
 .product-card img {
@@ -252,4 +255,30 @@ body {
 
 .generate-btn i {
   margin-right: 8px;
+}
+
+/* selected card visual */
+.product-card.selected {
+  /* Keep the original thin border but add a visible outer ring using box-shadow */
+  border-color: #e3a535;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08), 0 0 0 3px rgba(227, 165, 53, 0.12);
+}
+
+/* hover motion and hover border color - use outer ring to avoid layout shift */
+.product-card:hover,
+.product-card:focus-within {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 0 0 3px rgba(227, 165, 53, 0.12);
+}
+
+/* chat message styles */
+.chat-user {
+  text-align: right;
+  color: #111;
+  font-weight: 600;
+}
+
+.chat-assistant {
+  text-align: left;
+  color: #333;
 }
